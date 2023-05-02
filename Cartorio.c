@@ -5,7 +5,7 @@
 
 int main ()
 {
-	int opcao=0; //Definindo variaveis
+	int opcao=0; //definindo variaveis
 	int laco=1;
 	
 	for(laco=1;laco=1;)
@@ -13,14 +13,14 @@ int main ()
 	
 		system("cls");
 	
-		setlocale(LC_ALL, "Portuguese"); //Definir linguagem
+		setlocale(LC_ALL, "Portuguese"); //definir linguagem
 	
 		printf("### Cartório da EBAC ###\n\n"); //inicio do menu
 		printf("Escolha a opção desejada: \n\n");
 		printf("\t1 - Registrar\n");
 		printf("\t2 - Consultar\n");
-		printf("\t3 - Deletar\n\n"); 
-		//printf("\t4 - Listar\n\n"); //fim do menu
+		printf("\t3 - Deletar\n"); 
+		printf("\t4 - Sair do sistema\n\n"); //fim do menu
 		printf("Opção:  ");
 	
 		scanf("%d", &opcao); //armazenando a escolha do user
@@ -42,6 +42,11 @@ int main ()
 				deletar();	
 			break;
 			
+			case 4:
+				printf("Saindo...Obrigado por utilizar o sistema\n\n");
+				return 0;	
+			break;
+			
 			default:
 				printf("Opção invalida\n");
 				system("pause");
@@ -53,7 +58,7 @@ int main ()
 	}
 }
 
-int registro() //Função responsável por cadastrar novos usuários
+int registro() //função responsável por cadastrar novos usuários
 {
 	//inicio da criação das variáveis
 	char arquivo[40];
@@ -66,7 +71,7 @@ int registro() //Função responsável por cadastrar novos usuários
 	printf("Digite o CPF a ser cadastrado: "); //coletando informações do user
 	scanf("%s", cpf); //%s para string
 	
-	strcpy(arquivo, cpf); //Responsável por copiar os valores das string
+	strcpy(arquivo, cpf); //responsável por copiar os valores das string
 	
 	FILE *file; //cria o arquivo
 	file = fopen(arquivo, "w"); //cria o arquivo e o "w" significa escrever
@@ -107,16 +112,16 @@ int registro() //Função responsável por cadastrar novos usuários
 }
 
 
-int consultar() //Função responsável pela consulta dos usuários
+int consultar() //função responsável pela consulta dos usuários
 {
-	setlocale(LC_ALL, "Portuguese"); //Definir linguagem
+	setlocale(LC_ALL, "Portuguese"); //definir linguagem
 	
 	//inicio abertura das variáveis
 	char cpf[40];
 	char conteudo[200];
 	//termino abertura das variáveis
 	
-	printf("Digite o CPF que deseja consultar: "); //Coletando informações para a consulta
+	printf("Digite o CPF que deseja consultar: "); //coletando informações para a consulta
 	scanf("%s", cpf);
 	
 	FILE *file;
@@ -126,7 +131,7 @@ int consultar() //Função responsável pela consulta dos usuários
 	
 	printf("Dados do usuário:\n\n");
 	
-	if(file == NULL) //Validação para dados inexistentes
+	if(file == NULL) //validação para dados inexistentes
 	{
 		printf("\n\nDados inexistentes!\n");
 	}
@@ -143,9 +148,9 @@ int consultar() //Função responsável pela consulta dos usuários
 	system("pause");
 }
 
-int deletar() //Função criada para a exclusão de usuários
+int deletar() //função criada para a exclusão de usuários
 {
-	setlocale(LC_ALL, "Portuguese"); //Definir linguagem
+	setlocale(LC_ALL, "Portuguese"); //definir linguagem
 	
 	//inicio abertura das variáveis
 	char cpf[40];
@@ -153,17 +158,17 @@ int deletar() //Função criada para a exclusão de usuários
 	char conteudo[200];
 	//termino abertura das variáveis	
 	
-	printf("Digite o CPF que deseja excluir: "); //Coletando informações para a exclusão
+	printf("Digite o CPF que deseja excluir: "); //coletando informações para a exclusão
 	scanf("%s", cpf);
 	
 	FILE *file;
 	file = fopen(cpf,"r"); //abrir o arquivo "r" para leitura	
 	
-	if (file == NULL) //Validação para usuário inexistente
+	if (file == NULL) //validação para usuário inexistente
 	{
 		printf("\n\nUsuário não encontrado!\n\n\n");
 		system("pause");
-		return 0;
+		return 0; //saindo da função
 	}
 	
 	while(fgets(conteudo, 200, file) != NULL) //salvando o valor dos dados na variável
@@ -171,7 +176,7 @@ int deletar() //Função criada para a exclusão de usuários
 		printf("%s", conteudo);	//exibindo os dados do user
 	}
 		fclose(file);
-		printf("\n\nDeseja excluir os dados desse usuário? \n"); //Questionando se os dados exibidos são os que deseja excluir
+		printf("\n\nDeseja excluir os dados desse usuário? \n"); //questionando se os dados exibidos são os que deseja excluir
 		printf("1 - Sim\t");
 		printf("\t2 - Não\n");
 		printf("Opção: ");
@@ -189,16 +194,16 @@ int deletar() //Função criada para a exclusão de usuários
 			case 2:
 				printf("\tRetornando ao início!\n\n\n");
 				system("pause");
-				return 0; //Retornando o programa ao inicio
+				return 0; //saindo da função
 			break;
 			
 			default:
 				printf("\tOpção invalida! Retornando ao início!\n\n\n");
 				system("pause");
-				return 0; //Retornando o programa ao inicio
+				return 0; //saindo da função
 			break;
 		}
-		remove(cpf); //Excluindo os dados caso passe nas validações
+		remove(cpf); //excluindo os dados caso passe nas validações
 	}
 
 
